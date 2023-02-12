@@ -1,0 +1,62 @@
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-image {
+    flex: 1 1 40%;
+    height: 50%;
+    background-color: #2A5DC6;
+}
+.login {
+    flex: 1 1 40%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 10%;
+    background-color: white;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+            .input-container {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+
+    .btn {
+        all: unset;
+        text-align: center;
+        color: white;
+        background-color: #2A5DC6;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .btn-google {
+        color: gray;
+        background-color: transparent;
+        border: 1px solid gray;
+    }
+
+    p {
+        color: gray;
+        span {
+            color: #2A5DC6;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+}
