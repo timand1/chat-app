@@ -1,0 +1,16 @@
+@use './colors.scss';
+
+@mixin button() {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    color: colors.$secondary-font;
+    background-color: colors.$secondary-bg;
+    border-radius: 4px;
+    padding: 12px 12px;
+    margin-top: 20px;
+    transition: all 0.25s;
+    &:hover {
+        box-shadow: 4px 4px 6px black;
+    }
+}

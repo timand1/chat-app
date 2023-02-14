@@ -1,227 +1,276 @@
+@use '../../styles/colors.scss';
+@use '../../styles/mixins.scss';
+
 .login-page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.login-image {
-    flex: 1 1 40%;
-    height: 80%;
-    background-color: #2A5DC6;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 40px;
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
-    padding: 10% 10% 2% 10%;
-    .chatbubbles {
-        position: relative;
-        .emoji {
-            color: #e3e317;
-            font-size: 24px;
-        }
-        
-        .comments {
-            color: white;
-        }
-        svg {
-            font-size: 20px;
-            position: absolute;
-            &:nth-child(1) {
-                top: 0;
-                left: -20px;
-            }
-            &:nth-child(2) {
-                top: 160px;
-                left: 60px;
-            }
-            &:nth-child(3) {
-                right: 120px;
-                bottom: 85px;
-            }
-            &:nth-child(4) {
-                bottom: 120px;
-                right: 30px;
-            }
-            &:nth-child(5) {
-                font-size: 40px;
-                top: 80px;
-                right: -20px;
-            }
-            &:nth-child(6) {
-                top: 30px;
-                left: 205px;
-            }
-        }
+    .login-image {
+        box-shadow: 10px 9px 26px rgba(0, 0, 0, 0.07);
+        flex: 1 1 40%;
         height: 80%;
-        width: 100%;
+        background-color: colors.$secondary-bg;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        .chatbubble-left, .chatbubble-right {
-            align-self: flex-start;
-            background-color: #35CF5E;
-            padding: 12px;
-            border-radius: 12px;
+        gap: 40px;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        padding: 10% 10% 2% 10%;
+        .chatbubbles {
             position: relative;
-            &:after {
+            .emoji {
+                color: colors.$emoji;
+                font-size: 24px;
+            }
+            
+            .comments {
+                color: colors.$secondary-font;
+            }
+            svg {
+                font-size: 20px;
                 position: absolute;
-                content: "";
-                width: 2px;
-                left: 20%;
-                height: 14px;
-                border-left: 10px solid transparent;
-                border-right: 12px solid transparent;
-                border-top: 27px solid #35CF5E;
-                rotate: 20deg;
+                &:nth-child(1) {
+                    top: 0;
+                    left: -20px;
+                }
+                &:nth-child(2) {
+                    top: 160px;
+                    left: 60px;
+                }
+                &:nth-child(3) {
+                    right: 120px;
+                    bottom: 85px;
+                }
+                &:nth-child(4) {
+                    bottom: 120px;
+                    right: 30px;
+                }
+                &:nth-child(5) {
+                    font-size: 40px;
+                    top: 80px;
+                    right: -20px;
+                }
+                &:nth-child(6) {
+                    top: 30px;
+                    left: 205px;
+                }
             }
-        }
-        .chatbubble-right {
-            background-color: #32A0FA;
-            align-self: flex-end;
-            &:after {
-                border-top-color: #32A0FA;
-                left: 60%;
-                rotate: -20deg;
+            height: 80%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            .chatbubble-left, .chatbubble-right {
+                align-self: flex-start;
+                background-color: colors.$chatbubble-recieve;
+                padding: 12px;
+                border-radius: 12px;
+                position: relative;
+                &:after {
+                    position: absolute;
+                    content: "";
+                    width: 2px;
+                    left: 20%;
+                    height: 14px;
+                    border-left: 10px solid transparent;
+                    border-right: 12px solid transparent;
+                    border-top: 27px solid colors.$chatbubble-recieve;
+                    rotate: 20deg;
+                }
             }
+            .chatbubble-right {
+                background-color: colors.$chatbubble-send;
+                align-self: flex-end;
+                &:after {
+                    border-top-color: colors.$chatbubble-send;
+                    left: 60%;
+                    rotate: -20deg;
+                }
+            }
+            
         }
-
-    }
-
-    .divider {
-        width: 80%;
-        height: 1px;
-        background-color: white;
-    }
-    .text-container {
-        h2, p {
-            color: white;
-            text-align: center;
+        
+        .divider {
+            width: 80%;
+            height: 1px;
+            background-color: colors.$divider;
         }
-        p {
-            margin-top: 8px;
-            color: rgb(230, 230, 230);
-        }
+        .text-container {
+            h2, p {
+                color: colors.$secondary-font;
+                text-align: center;
+            }
+            p {
+                margin-top: 8px;
+                color: colors.$gray-font;
+            }
 
+        }
     }
-}
-.login {
-    flex: 1 1 40%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 30px 10% 20px 10%;
-    background-color: white;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
-    .logo {
-        width: 15%;
-        aspect-ratio: 1;
-    }
-    h2 {
-        font-size: 38px;
-        font-family: 'Carter One', cursive;
-    }
-    form {
+    .login {
+        box-shadow: 10px 9px 26px rgba(0, 0, 0, 0.07);
+        flex: 1 1 40%;
+        height: 80%;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
         gap: 20px;
-        width: 100%;
-        section {
+        padding: 30px 10% 20px 10%;
+        background-color: colors.$primary-bg;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+        .logo {
+            width: 15%;
+            aspect-ratio: 1;
+        }
+        h2 {
+            font-size: 38px;
+            font-family: 'Carter One', cursive;
+        }
+        form {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            
-            .input-container {
+            width: 100%;
+            section {
                 display: flex;
                 flex-direction: column;
-                position: relative;
-                svg {
-                    font-size: 14px;
-                    top: calc(50% - 7px);
-                    right: 7px;
-                    position: absolute;                    
+                gap: 30px;
+                
+                .input-container {
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    svg {
+                        font-size: 14px;
+                        top: calc(50% - 7px);
+                        right: 7px;
+                        position: absolute;                    
+                    }
+                    .display-password {
+                        cursor: pointer;
+                    }
+                    input {
+                        all: unset;
+                        outline: 1px solid colors.$gray-font;
+                        outline-offset: -1;
+                        border-radius: 4px;
+                        padding: 10px 12px;
+                        font-size: 18px;
+                        &:focus {
+                            outline-color: colors.$secondary-bg;
+
+                        }
+                    }
+                    label {
+                        pointer-events: none;
+                        position: absolute;
+                        top: calc(50% - 7px);
+                        left: 10px;
+                        font-size: 14px;
+                        transition: all 150ms;
+                    }
+                    
+                    input:focus ~ label, input:not(:placeholder-shown) ~label {
+                        font-size: 12px;
+                        padding: 4px 4px 0 4px;
+                        background-color: colors.$primary-bg;
+                        top: -10px;
+                        z-index: 1;
+                        color: colors.$secondary-bg;
+                    }
+
+                    input:focus ~svg {
+                        color: colors.$secondary-bg;                             
+                    }   
+                    .error-text {
+                        position: absolute;
+                        bottom: -16px;
+                        font-size: 12px;
+                        color: colors.$error-font;
+                    }                 
                 }
-                input {
-                    all: unset;
-                    outline: 1px solid gray;
-                    outline-offset: -1;
-                    border-radius: 4px;
-                    padding: 10px 12px;
-                    font-size: 18px;
-                    &:focus {
-                        outline-color: #2A5DC6;
+
+                .email-error, .password-error {
+                    input {
+                        outline: 1px solid colors.$error-font;
+
+                        &:focus {
+                            outline-color: colors.$error-font;
+                        }
+                    }  
+                    
+                    input:focus ~ label, input:not(:placeholder-shown) ~label { 
+                        color: colors.$error-font;
+                    }
+                    svg {
+                        color: colors.$error-font;
                     }
                 }
-                label {
-                    pointer-events: none;
-                    position: absolute;
-                    top: calc(50% - 7px);
-                    left: 10px;
-                    font-size: 14px;
-                    transition: all 150ms;
-                }
-                
-                input:focus ~ label, input:not(:placeholder-shown) ~label {
-                    font-size: 12px;
-                    padding: 4px 4px 0 4px;
-                    background-color: white;
-                    top: -10px;
-                    z-index: 1;
-                    color: #2A5DC6;
-                }
-                
+            }
+            
+        }
+
+        .btn {
+            @include mixins.button;
+        }
+        
+        .divider {
+            width: 80%;
+            height: 1px;
+            background-color: colors.$divider;
+        }
+        
+        .btn-google {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: colors.$dark-gray-font;
+            padding: 0;
+            background-color: transparent;
+            border: 1px solid colors.$dark-gray-font;
+            img {
+                height: 40px;
             }
         }
-
-    }
-
-    .btn {
-        all: unset;
-        cursor: pointer;
-        text-align: center;
-        color: white;
-        background-color: #2A5DC6;
-        border-radius: 4px;
-        padding: 12px 12px;
-    }
-
-    .divider {
-        width: 80%;
-        height: 1px;
-        background-color: gray;
-    }
-
-    .btn-google {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: gray;
-        padding: 0;
-        background-color: transparent;
-        border: 1px solid gray;
-        img {
-            height: 40px;
-        }
-    }
-
-    p {
-        color: gray;
-        span {
-            color: #2A5DC6;
-            font-weight: 700;
-            cursor: pointer;
+        
+        p {
+            color: gray;
+            span {
+                color: colors.$secondary-bg;
+                font-weight: 700;
+                cursor: pointer;
+            }
         }
     }
 }
 
 @media screen and (max-width: 786px) {
+    .login-page {
+        position: relative;
+        .login-image { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            & * {
+                display: none;
+            }
+        }
 
+        .login {
+            max-width: 90%;
+            height: 90%;
+            border-radius: 4px;
+        }
+    }
 }
