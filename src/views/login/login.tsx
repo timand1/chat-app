@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './login.scss'
+import Splitpage from '../../components/splitpage/splitpage';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword  } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg'
 import googleIcon from '../../assets/google.svg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faFaceLaughBeam, faAt, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faAt, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -86,30 +87,7 @@ function Login() {
 
   return (
     <div className="login-page">
-      <div className='login-image'>
-        <div className='chatbubbles'>
-        <FontAwesomeIcon className='emoji' icon={faFaceLaughBeam} />
-        <FontAwesomeIcon className='comments' icon={faComments} />
-        <FontAwesomeIcon className='emoji' icon={faFaceLaughBeam} />
-        <FontAwesomeIcon className='comments' icon={faComments} />
-        <FontAwesomeIcon className='emoji' icon={faFaceLaughBeam} />
-        <FontAwesomeIcon className='comments' icon={faComments} />
-          <div className="chatbubble-left">
-              <p>Chat anytime</p>
-          </div>
-          <div className="chatbubble-right">
-              <p>Anytime?</p>
-          </div>
-          <div className="chatbubble-left">
-            <p>And anywhere!</p>
-          </div>
-        </div>
-          <div className="divider"></div>
-        <div className="text-container">
-          <h2>Effortless Communication</h2>
-          <p>Intuitive design, straightforward features simplify communication</p>
-        </div>
-      </div>
+      <Splitpage left={true} />
       <div className="login">
         <img className='logo' src={logo} alt="Chat Circuit Logo" />
         <h2>Chat Circuit</h2>
@@ -144,7 +122,7 @@ function Login() {
         </form>
         <div className="divider"></div>
         <button className='btn btn-google' onClick={signInWithGoogle}><img src={googleIcon} alt="Google Icon" /> Sign in with Google</button>
-        <p>Don't have an account? <span onClick={() => navigate('/register')}>Sign Up</span></p>
+        <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
       </div>
 
       {loggedIn && 

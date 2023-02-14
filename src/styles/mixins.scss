@@ -14,3 +14,74 @@
         box-shadow: 4px 4px 6px black;
     }
 }
+
+@mixin input-container() {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    svg {
+        font-size: 14px;
+        top: calc(50% - 7px);
+        right: 7px;
+        position: absolute;                    
+    }
+    .display-password {
+        cursor: pointer;
+    }
+    input {
+        all: unset;
+        outline: 1px solid colors.$gray-font;
+        outline-offset: -1;
+        border-radius: 4px;
+        padding: 10px 12px;
+        font-size: 18px;
+        &:focus {
+            outline-color: colors.$secondary-bg;
+
+        }
+    }
+    label {
+        pointer-events: none;
+        position: absolute;
+        top: calc(50% - 7px);
+        left: 10px;
+        font-size: 14px;
+        transition: all 150ms;
+    }
+    
+    input:focus ~ label, input:not(:placeholder-shown) ~label {
+        font-size: 12px;
+        padding: 4px 4px 0 4px;
+        background-color: colors.$primary-bg;
+        top: -10px;
+        z-index: 1;
+        color: colors.$secondary-bg;
+    }
+
+    input:focus ~svg {
+        color: colors.$secondary-bg;                             
+    }   
+    .error-text {
+        position: absolute;
+        bottom: -16px;
+        font-size: 12px;
+        color: colors.$error-font;
+    }    
+}
+
+@mixin input-error {
+    input {
+        outline: 1px solid colors.$error-font;
+
+        &:focus {
+            outline-color: colors.$error-font;
+        }
+    }  
+    
+    input:focus ~ label, input:not(:placeholder-shown) ~label { 
+        color: colors.$error-font;
+    }
+    svg {
+        color: colors.$error-font;
+    }
+}
