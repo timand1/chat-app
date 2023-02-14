@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './login.scss'
 import Splitpage from '../../components/splitpage/splitpage';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg'
 import googleIcon from '../../assets/google.svg';
@@ -16,7 +16,18 @@ function Login() {
   const [loginErr, setLoginErr] = useState<boolean>(false)
   const navigate = useNavigate();
   const auth = getAuth();
-
+  
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate('/')
+        console.log(user);
+        const uid = user.uid;
+      } else {
+        navigate('/login')
+      }
+    });
+  }, [])
 
   const handleSignOut = () => {
     signOut(auth).then(() => {

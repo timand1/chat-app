@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './register.scss';
 // import Add from "../img/addAvatar.png";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 import { db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
@@ -20,7 +20,20 @@ const Register = () => {
   const [avatarAdded, setAvatarAdded] = useState<string>('')
   const [emailErr, setMailErr] = useState<boolean>(false)
   const [loginErr, setLoginErr] = useState<boolean>(false)
-
+  
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate('/')
+        console.log(user);
+        const uid = user.uid;
+      } else {
+        navigate('/login')
+      }
+    });
+  }, [])
+  
   const handleSubmit = async (e:any) => {
     setLoading(true);
     e.preventDefault();
@@ -33,6 +46,7 @@ const Register = () => {
     setMailErr(false)
     setLoginErr(false)
     setUsernameErr(false)
+    
     
     if(password.length < 6) {
       setPasswordErr(true)      
