@@ -7,6 +7,9 @@ import logo from '../../assets/logo.svg'
 import googleIcon from '../../assets/google.svg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 
 function Login() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -21,7 +24,7 @@ function Login() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate('/')
-        console.log(user);
+        // console.log(user);
         const uid = user.uid;
       } else {
         navigate('/login')
@@ -55,6 +58,7 @@ function Login() {
     }
     try {
       await signInWithEmailAndPassword(auth, email, password);      
+
     } catch (err) {
       setLoginErr(true)
     }
@@ -63,21 +67,37 @@ function Login() {
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(async (result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       // The signed-in user info.
       const user = result.user;
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      
+      // If first time logging in with google, create a user and empty userChats
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+      } else {
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName : user.displayName,
+          email : user.email,
+          photoURL: user.photoURL,
+        });
+        await setDoc(doc(db, "userChats", user.uid), {});
+      }
+
       navigate('/')
-      console.log(user);
+      
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorMessage);
+      // console.log(errorMessage);
       
         // The email of the user's account used.
         const email = error.customData.email;

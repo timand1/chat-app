@@ -21,18 +21,18 @@ const Register = () => {
   const [emailErr, setMailErr] = useState<boolean>(false)
   const [loginErr, setLoginErr] = useState<boolean>(false)
   
-  const auth = getAuth();
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigate('/')
-        console.log(user);
-        const uid = user.uid;
-      } else {
-        navigate('/login')
-      }
-    });
-  }, [])
+  // const auth = getAuth();
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       navigate('/')
+  //       console.log(user);
+  //       const uid = user.uid;
+  //     } else {
+  //       // navigate('/login')
+  //     }
+  //   });
+  // }, [])
   
   const handleSubmit = async (e:any) => {
     setLoading(true);
