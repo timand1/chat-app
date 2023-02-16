@@ -1,0 +1,33 @@
+@use '../../styles/colors.scss';
+@use '../../styles/mixins.scss';
+@use 'sass:color';
+
+.chats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    .userChat {
+        cursor: pointer;
+        border-radius: 12px;
+        padding: 12px;
+        display: flex;
+        color: colors.$secondary-font;
+        gap: 10px;
+        &:hover {
+            background-color: color.scale(colors.$secondary-bg, $lightness: 20%);
+        }
+        img, .no-avatar {
+            border-radius: 50%;
+        }
+    
+        .no-avatar {
+           @include mixins.no-avatar;
+        }
+    }
+
+    .active-chat {
+        outline: 2px solid black;
+        background-color: color.scale(colors.$secondary-bg, $lightness: 40%);
+        outline-offset: -4px;
+    }
+}

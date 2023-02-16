@@ -1,0 +1,22 @@
+@use '../../styles/colors.scss';
+@use '../../styles/mixins.scss';
+
+.userchats {
+    display: flex;
+    flex-direction: column;
+    header {
+        background-color: lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 8px;
+        img {
+            border-radius: 50%;
+        }
+        .no-avatar {
+            @include mixins.no-avatar;
+            border-radius: 50%;
+        }
+    }
+}

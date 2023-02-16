@@ -1,11 +1,22 @@
+@use '../../styles/colors.scss';
+
+.message {
+    border-radius: 12px;
+    padding: 10px;
+    max-width: 30%;
+    margin: 10px 0;
+    .text-date {
+        font-size: 12px;
+    }
+}
+
 .sent {
-    align-self: flex-start;
-    justify-self: flex-start;
-    background-color: green;
+    background-color: colors.$chatbubble-send;
+    border-top-left-radius: 0;
 }
 
 .recieved {
-    align-self: flex-end;
-    justify-self: flex-end;
-    background-color: blue;
+    margin-left: auto;
+    background-color: colors.$chatbubble-recieve;
+    border-top-right-radius: 0;
 }

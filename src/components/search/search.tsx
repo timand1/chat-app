@@ -1,4 +1,4 @@
-import React, { useContext, useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent } from "react";
 import {
   collection,
   query,
@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { getAuth } from "firebase/auth";
+import './search.scss';
 
 type User = {
     displayName: string
@@ -26,6 +27,7 @@ type User = {
   type SearchProps = {
     handleChat: (userChat : ChatProps) => void;
   }
+
 function Search(props: SearchProps) {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState<User | null>(null);
@@ -34,9 +36,7 @@ function Search(props: SearchProps) {
   const auth = getAuth()
   const { currentUser } = auth;
 
-  const handleSearch = async () => {
-    console.log(username);
-    
+  const handleSearch = async () => {    
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
@@ -53,9 +53,7 @@ function Search(props: SearchProps) {
     }
   };
 
-  const handleKey = (e:KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
-    
+  const handleKey = (e:KeyboardEvent<HTMLInputElement>) => {   
     e.key == "Enter" ? handleSearch() : null
   };
 
@@ -121,13 +119,16 @@ function Search(props: SearchProps) {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat" onClick={handleSelect}>
+        <div className="found-user" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
-          <div className="userChatInfo">
+          <div className="found-user-info">
             <span>{user.displayName}</span>
           </div>
         </div>
       )}
+      {user && 
+        <div className="divider"></div>
+      }
     </div>
   );
 };

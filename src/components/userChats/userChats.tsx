@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import Input from "../input/input";
 import Messages from "../messages/messages";
-import Search from "../search/search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import './userChats.scss';
 
 type User = {
     displayName: string
@@ -44,7 +46,17 @@ function UserChats(props: UserChatProps) {
       }, [currentUser?.uid]);
     return (
       <div className="userchats">
-
+        <header>
+          <h2>{props.chat?.user.displayName}</h2>
+          {props.chat?.user.photoURL &&
+            <img style={{width : '40px', height: '40px'}} src={props.chat?.user.photoURL} alt="" />
+          }
+          {!props.chat?.user.photoURL &&
+            <div className="no-avatar">
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+          }
+        </header>
         <Messages chat={props.chat} />
         <Input chat={props.chat} />
       </div>

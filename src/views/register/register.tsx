@@ -7,7 +7,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faFaceLaughBeam, faAt, faEye, faEyeSlash, faUser, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faAt, faEye, faEyeSlash, faUser, faImage } from "@fortawesome/free-solid-svg-icons";
 import Splitpage from "../../components/splitpage/splitpage";
 
 const Register = () => {
@@ -21,19 +21,6 @@ const Register = () => {
   const [emailErr, setMailErr] = useState<boolean>(false)
   const [loginErr, setLoginErr] = useState<boolean>(false)
   
-  // const auth = getAuth();
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       navigate('/')
-  //       console.log(user);
-  //       const uid = user.uid;
-  //     } else {
-  //       // navigate('/login')
-  //     }
-  //   });
-  // }, [])
-  
   const handleSubmit = async (e:any) => {
     setLoading(true);
     e.preventDefault();
@@ -41,7 +28,6 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
     setPasswordErr(false)
     setMailErr(false)
     setLoginErr(false)
@@ -67,12 +53,11 @@ const Register = () => {
       //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
+      if(file != undefined) {
       
       await uploadBytesResumable(storageRef, file).then(() => {
-        console.log(displayName);
         getDownloadURL(storageRef).then(async (downloadURL) => {
-          console.log(downloadURL);
-          // try {
+          try {
             //Update profile
             await updateProfile(res.user, {
               displayName,
@@ -89,13 +74,37 @@ const Register = () => {
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
-          // } catch (err) {
-          //   console.log(err);
-          //   setErr(true);
-          //   setLoading(false);
-          // }
+          } catch (err) {
+            console.log(err);
+            setErr(true);
+            setLoading(false);
+          }
         });
       });
+    } else {
+      try {
+        //Update profile
+        await updateProfile(res.user, {
+          displayName,
+          photoURL: '',
+        });
+        //create user on firestore
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          displayName,
+          email,
+          photoURL: '',
+        });
+
+        //create empty user chats on firestore
+        await setDoc(doc(db, "userChats", res.user.uid), {});
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+        setErr(true);
+        setLoading(false);
+      }
+    }
     } catch (err) {
       
       setErr(true);

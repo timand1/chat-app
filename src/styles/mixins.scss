@@ -85,3 +85,11 @@
         color: colors.$error-font;
     }
 }
+
+@mixin no-avatar {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    background-color: gray;
+}

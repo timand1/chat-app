@@ -1,4 +1,17 @@
+@use '../../styles/colors.scss';
+
 .home {
+    height: 100vh;
     display: flex;
-    gap: 4em;
+    flex-direction: column;
+    justify-content: center;
+    .main-content {
+        display: flex;
+        background-color: colors.$primary-bg;
+        height: calc(80% - 70px);
+        border-bottom-right-radius: 8px;
+        .userchats {
+            flex: 1;
+        }
+    }
 }

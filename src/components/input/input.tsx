@@ -1,8 +1,11 @@
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
 import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 import { db } from "../../firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import './input.scss';
 
 type User = {
   displayName: string
@@ -23,6 +26,10 @@ function Input(props: InputProps) {
     const auth = getAuth();
     const [text, setText] = useState("");
     const [img, setImg] = useState(null);
+
+    const handleEnter = (e:KeyboardEvent<HTMLInputElement>) => {   
+      e.key == "Enter" ? handleSend() : null
+    };
 
     const handleSend: () => Promise<void> = async () => {
       console.log(auth.currentUser);
@@ -60,20 +67,21 @@ function Input(props: InputProps) {
           type="text"
           placeholder="Type something..."
           onChange={(e) => setText(e.target.value)}
+          onKeyUp={(e) => handleEnter(e)}
           value={text}
         />
         <div className="send">
-          {/* <img src={Attach} alt="" /> */}
+          {/* <img src={Attach} alt="" />
           <input
             type="file"
             style={{ display: "none" }}
             id="file"
-            // onChange={(e) => setImg(e.target.files[0])}
+            onChange={(e) => setImg(e.target.files[0])}
           />
           <label htmlFor="file">
-            {/* <img src={Img} alt="" /> */}
-          </label>
-          <button onClick={handleSend}>Send</button>
+            <img src={Img} alt="" />
+          </label> */}
+          <FontAwesomeIcon onClick={handleSend} icon={faPaperPlane} />
         </div>
       </div>
     );
